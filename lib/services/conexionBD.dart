@@ -2,14 +2,21 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-  //const url = 'http://raspberrytronxi.ddns.net/webchat_server_node';
-  const url = 'http://192.168.0.5/webchat_server_node';
+  const url = 'http://raspberrytronxi.ddns.net/webchat_server_node';
+  //const url = 'http://192.168.0.5/webchat_server_node';
 
 Future<String> login(usuario, contrasena) async {
   Map data = {'usuario': usuario, 'pass' : contrasena};
   var body = json.encode(data);
   final response = await http
-        .post(url + '/login', headers: {"Content-Type": "application/json"}, body: body);
+      .post(url + '/login', headers: {"Content-Type": "application/json"}, body: body);
+  return response.body;
+}
+Future<String> token(usuario, token) async {
+  Map data = {'usuario': usuario, 'token' : token};
+  var body = json.encode(data);
+  final response = await http
+      .post(url + '/token', headers: {"Content-Type": "application/json"}, body: body);
   return response.body;
 }
 

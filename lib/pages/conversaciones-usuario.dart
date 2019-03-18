@@ -13,7 +13,9 @@ import 'package:webchat_flutter/services/conexionSocket.dart' as socket;
 import 'package:webchat_flutter/pages/personas.dart';
 import 'package:webchat_flutter/pages/chat.dart';
 import 'package:toast/toast.dart';
-
+_cambiarToken(user, token)async{
+  await conexion.token(user, token);
+}
 class Conversaciones_usuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class Conversaciones_usuario extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.exit_to_app),
                 onPressed: () {
+                  _cambiarToken(DatosUsuario().getUser(), null);
                   _guardarPreferencias();
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Login()));
@@ -67,8 +70,11 @@ class Conversaciones_usuarioPageState
 
   Conversaciones_usuarioPageState() {
     print("El token es "+ DatosUsuario().getToken());
+    _cambiarToken(DatosUsuario().getUser(), DatosUsuario().getToken());
     wd = construir();
   }
+
+
 
   Future<void> initPlatformState() async {
     socketIO =
