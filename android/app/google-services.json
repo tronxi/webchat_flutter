@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "971284708631",
+    "firebase_url": "https://webchat-5e366.firebaseio.com",
+    "project_id": "webchat-5e366",
+    "storage_bucket": "webchat-5e366.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971284708631:android:950ff42092007d45",
+        "android_client_info": {
+          "package_name": "com.cerilla.webchat_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971284708631-cplmsnb2rllrtmcqmo69dv1btn6e8t4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Nf8KUK_7-2vdgRXqRfCm-rekNStcGZc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971284708631:android:03a4ef4092a44746",
+        "android_client_info": {
+          "package_name": "com.tronxi.sergi.webchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971284708631-b32tlck9fq5p6a51ji0v2o5439ieeqlf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tronxi.sergi.webchat",
+            "certificate_hash": "f7a24031d9323928304638cdb2b7f3ce6166cab5"
+          }
+        },
+        {
+          "client_id": "971284708631-cplmsnb2rllrtmcqmo69dv1btn6e8t4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Nf8KUK_7-2vdgRXqRfCm-rekNStcGZc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971284708631-cplmsnb2rllrtmcqmo69dv1btn6e8t4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
