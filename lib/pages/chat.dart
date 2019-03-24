@@ -31,7 +31,7 @@ class Chat extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text("conversacion"),
+            title: Text(DatosUsuario().getPersona()),
           ),
           body: Container(
               child: Column(
@@ -65,10 +65,13 @@ class Chat extends StatelessWidget {
   }
 
   _enviarMensaje() async {
-    print(mensaje);
-    var resultado = await conexion.enviarMensajes(
-        DatosUsuario().getUser(), DatosUsuario().getId(), mensaje);
-    controllerMensaje.text = "";
+    if (mensaje != "" && mensaje != null) {
+      String mensajeEnv = mensaje;
+      controllerMensaje.text = "";
+      this.mensaje = "";
+      var resultado = await conexion.enviarMensajes(
+          DatosUsuario().getUser(), DatosUsuario().getId(), mensajeEnv);
+    }
   }
 }
 
@@ -155,7 +158,7 @@ class MensajeLista extends StatelessWidget {
   MensajeLista({Key key, this.datos}) : super(key: key);
 
   List<MensajeItem> _buildContactList() {
-    return datos.reversed.map((contact) =>  MensajeItem(contact)).toList();
+    return datos.reversed.map((contact) => MensajeItem(contact)).toList();
   }
 
   @override
@@ -189,9 +192,8 @@ class MensajeItem extends StatelessWidget {
       propio = false;
     }
     return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0)
-        ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
         color: color,
         child: ListTile(
           leading: propio

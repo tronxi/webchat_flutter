@@ -17,7 +17,7 @@ class Personas extends StatelessWidget{
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("personas"),
+        title: Text("Contactos"),
       ),
       body: PersonasPage(),
     );

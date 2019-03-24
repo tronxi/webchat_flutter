@@ -21,7 +21,8 @@ class Conversaciones_usuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Conversaciones-usuario"),
+          automaticallyImplyLeading: false,
+          title: Text("Conversaciones"),
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.search),
