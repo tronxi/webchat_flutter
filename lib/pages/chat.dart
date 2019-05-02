@@ -10,6 +10,7 @@ import 'dart:async';
 import 'package:webchat_flutter/models/mensajeModel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:webchat_flutter/pages/conversaciones-usuario.dart';
+import 'dart:convert' show utf8;
 
 ScrollController _scrollController = new ScrollController();
 bool primeraVez = true;
@@ -158,7 +159,10 @@ class MensajeLista extends StatelessWidget {
   MensajeLista({Key key, this.datos}) : super(key: key);
 
   List<MensajeItem> _buildContactList() {
-    return datos.reversed.map((contact) => MensajeItem(contact)).toList();
+    return datos.reversed
+        .map((contact) => MensajeItem(contact.texto2, contact.fecha,
+            contact.nombre != DatosUsuario().getUser()))
+        .toList();
   }
 
   @override
@@ -173,51 +177,115 @@ class MensajeLista extends StatelessWidget {
 }
 
 class MensajeItem extends StatelessWidget {
-  MensajeModel _mensaje;
+  MensajeItem(this.message, this.time, this.isMe);
 
-  MensajeItem(this._mensaje);
+  final String message, time;
+  final isMe;
 
   @override
   Widget build(BuildContext context) {
-    Alignment al;
-    Color color;
-    bool propio;
-    if (_mensaje.nombre == DatosUsuario().getUser()) {
-      al = Alignment.bottomRight;
-      color = Color(0xffDFFFA9);
-      propio = true;
-    } else {
-      al = Alignment.bottomLeft;
-      color = Color(0xffCAFF70);
-      propio = false;
-    }
-    return Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-        color: color,
-        child: ListTile(
-          leading: propio
-              ? Text(_mensaje.fecha,
-                  style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
-              : Text(""),
-          title: Align(
-            child: Text(
-              _mensaje.nombre,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            alignment: al,
+    final bg = isMe ? Color(0xffDFFFA9) : Color(0xffCAFF70);
+    final align = isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+    final radius = isMe
+        ? BorderRadius.only(
+      topRight: Radius.circular(5.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(5.0),
+    )
+        : BorderRadius.only(
+      topLeft: Radius.circular(5.0),
+      bottomLeft: Radius.circular(5.0),
+      bottomRight: Radius.circular(10.0),
+    );
+    return Column(
+      crossAxisAlignment: align,
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.all(3.0),
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: .5,
+                  spreadRadius: 1.0,
+                  color: Colors.black.withOpacity(.12))
+            ],
+            color: bg,
+            borderRadius: radius,
           ),
-          subtitle: Align(
-            child: Text(
-              _mensaje.texto2,
-              style: TextStyle(fontSize: 16),
-            ),
-            alignment: al,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 48.0),
+                child: Text(message, style: TextStyle(fontSize: 16)),
+              ),
+              Text("\n"),
+              Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                child: Row(
+                  children: <Widget>[
+                    Text(time,
+                        style: TextStyle(
+                            fontSize: 12, fontStyle: FontStyle.italic)),
+                    SizedBox(width: 3.0)
+                  ],
+                ),
+              )
+            ],
           ),
-          trailing: propio == false
-              ? Text(_mensaje.fecha,
-                  style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
-              : Text(""),
-        ));
+        )
+      ],
+    );
   }
 }
+
+//class MensajeItem extends StatelessWidget {
+//  MensajeModel _mensaje;
+//
+//  MensajeItem(this._mensaje);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    Alignment al;
+//    Color color;
+//    bool propio;
+//    if (_mensaje.nombre == DatosUsuario().getUser()) {
+//      al = Alignment.bottomRight;
+//      color = Color(0xffDFFFA9);
+//      propio = true;
+//    } else {
+//      al = Alignment.bottomLeft;
+//      color = Color(0xffCAFF70);
+//      propio = false;
+//    }
+//    return Card(
+//        shape:
+//            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+//        color: color,
+//        child: ListTile(
+//          leading: propio
+//              ? Text(_mensaje.fecha,
+//                  style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
+//              : Text(""),
+//          title: Align(
+//            child: Text(
+//              _mensaje.nombre,
+//              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//            ),
+//            alignment: al,
+//          ),
+//          subtitle: Align(
+//            child: Text(
+//              _mensaje.texto2,
+//              style: TextStyle(fontSize: 16),
+//            ),
+//            alignment: al,
+//          ),
+//          trailing: propio == false
+//              ? Text(_mensaje.fecha,
+//                  style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
+//              : Text(""),
+//        ));
+//  }
+//}

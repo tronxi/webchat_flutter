@@ -13,9 +13,11 @@ import 'package:webchat_flutter/services/conexionSocket.dart' as socket;
 import 'package:webchat_flutter/pages/personas.dart';
 import 'package:webchat_flutter/pages/chat.dart';
 import 'package:toast/toast.dart';
-_cambiarToken(user, token)async{
+
+_cambiarToken(user, token) async {
   await conexion.token(user, token);
 }
+
 class Conversaciones_usuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -70,12 +72,10 @@ class Conversaciones_usuarioPageState
   }
 
   Conversaciones_usuarioPageState() {
-    print("El token es "+ DatosUsuario().getToken());
+    print("El token es " + DatosUsuario().getToken());
     _cambiarToken(DatosUsuario().getUser(), DatosUsuario().getToken());
     wd = construir();
   }
-
-
 
   Future<void> initPlatformState() async {
     socketIO =
@@ -143,26 +143,27 @@ class ConversacionesUsuarioItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        trailing: _conversacion.estado != 0
-            ? CircleAvatar(
-                backgroundColor: Colors.lightGreen,
-                child: Text(
-                  _conversacion.estado.toString(),
-                  style: TextStyle(color: Colors.white),
-                ))
-            : Text(""),
-        title: Align(
-          child: Text(
-            _conversacion.nombre,
-            style: TextStyle(fontSize: 20),
-          ),
-          alignment: Alignment.bottomLeft,
-        ),
-        onTap: () {
-          DatosUsuario().setPersona(_conversacion.nombre);
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Chat()));
-        });
+    return Card(
+        child: ListTile(
+            trailing: _conversacion.estado != 0
+                ? CircleAvatar(
+                    backgroundColor: Colors.lightGreen,
+                    child: Text(
+                      _conversacion.estado.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ))
+                : Text(""),
+            title: Align(
+              child: Text(
+                _conversacion.nombre,
+                style: TextStyle(fontSize: 20),
+              ),
+              alignment: Alignment.bottomLeft,
+            ),
+            onTap: () {
+              DatosUsuario().setPersona(_conversacion.nombre);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Chat()));
+            }));
   }
 }
