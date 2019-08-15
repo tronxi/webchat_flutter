@@ -10,7 +10,6 @@ import 'dart:async';
 import 'package:webchat_flutter/models/mensajeModel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:webchat_flutter/pages/conversaciones-usuario.dart';
-import 'dart:convert' show utf8;
 
 ScrollController _scrollController = new ScrollController();
 bool primeraVez = true;

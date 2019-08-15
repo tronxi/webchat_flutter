@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-  const url = 'http://raspberrytronxi.ddns.net/webchat_server_node';
-  //const url = 'http://192.168.0.5/webchat_server_node';
+  //const url = 'http://raspberrytronxi.ddns.net/webchat_server_node';
+  const url = 'http://192.168.1.5/webchat_server_node';
 
 Future<String> login(usuario, contrasena) async {
   Map data = {'usuario': usuario, 'pass' : contrasena};
